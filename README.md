@@ -81,37 +81,38 @@ This Discord bot helps server moderators identify popular forum posts within spe
     # npm run dev
     ```
 
-### 5. Deployment to Railway
+### 5. Deployment Instructions
 
-Railway is a platform that allows you to deploy your applications with ease, and it's well-suited for long-running Discord bots.
+These instructions outline the general steps for deploying your Discord bot to a hosting service. Specific steps may vary depending on your chosen provider.
 
-1.  **Create a Railway Account:**
-    -   If you don't have one, sign up at [https://railway.app/](https://railway.app/).
+1.  **Prepare Your Project for Deployment:**
+    -   Ensure your project is version-controlled (e.g., with Git) and pushed to a remote repository (e.g., GitHub, GitLab, Bitbucket).
+    -   Make sure all necessary dependencies are listed in your `package.json` file.
 
-2.  **Create a New Project:**
-    -   From your Railway dashboard, click "New Project".
-    -   You can choose to "Deploy from GitHub Repo" (recommended for continuous deployment) or "Deploy a Starter Template" / "Empty Project". If deploying from GitHub, connect your repository.
+2.  **Choose a Hosting Provider:**
+    -   Select a hosting service that supports Node.js applications and allows for long-running processes (as Discord bots require a persistent connection).
+    -   Examples include Railway, Render, DigitalOcean, AWS EC2, Heroku (check current free tier availability).
 
-3.  **Configure Environment Variables:**
-    -   In your Railway project, go to the "Variables" tab.
-    -   Add the following environment variables, replacing the placeholders with your actual values:
-        -   `DISCORD_BOT_TOKEN`: Your bot's token.
-        -   `DISCORD_CLIENT_ID`: Your bot's client ID.
-        -   `DISCORD_GUILD_ID`: The ID of your development guild (if you're registering guild commands).
-    -   **Important**: Do not commit your `.env` file to version control.
+3.  **Configure Environment Variables on Your Host:**
+    -   Most hosting providers have a section for managing environment variables.
+    -   Add the following variables, ensuring their values are correct and kept secret:
+        -   `DISCORD_BOT_TOKEN`: Your bot's token from the Discord Developer Portal.
+        -   `DISCORD_CLIENT_ID`: Your bot's application ID.
+        -   `DISCORD_GUILD_ID`: (Optional) The ID of your development guild for guild-specific command registration.
+    -   **Crucially, do NOT commit your `.env` file to your version control system.**
 
 4.  **Set Build and Start Commands:**
-    -   Railway usually auto-detects Node.js projects.
-    -   Ensure your "Build Command" is `npm install` (or `yarn install` if you use Yarn).
-    -   Ensure your "Start Command" is `node src/index.js`.
+    -   Your hosting provider will typically ask for commands to build and start your application.
+    -   **Build Command:** `npm install` (or `yarn install` if you use Yarn).
+    -   **Start Command:** `node src/index.js` (This command runs your main bot file).
 
-5.  **Deploy:**
-    -   If you connected a GitHub repository, Railway will automatically deploy on pushes to your main branch.
-    -   Otherwise, you can manually trigger a deploy from the "Deployments" tab.
+5.  **Deploy Your Application:**
+    -   Follow your hosting provider's specific instructions to deploy your project. This often involves connecting your Git repository and triggering a deployment.
 
 6.  **Register Slash Commands:**
-    -   Your bot will register slash commands when it starts. Ensure your `DISCORD_CLIENT_ID` and `DISCORD_GUILD_ID` (if registering guild-specific commands) are correctly set as environment variables on Railway.
-    -   The bot needs to be running for the commands to be registered.
+    -   Your bot is configured to register slash commands when it starts up.
+    -   Ensure your `DISCORD_CLIENT_ID` and `DISCORD_GUILD_ID` (if applicable) are correctly set as environment variables on your hosting service.
+    -   The bot needs to be running successfully on your host for the commands to be registered with Discord.
 
 ## Project Structure
 
