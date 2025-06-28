@@ -81,37 +81,43 @@ This Discord bot helps server moderators identify popular forum posts within spe
     # npm run dev
     ```
 
-### 5. Deployment to Vercel
+### 5. Deployment to Railway
 
-This bot is designed to be deployed as a serverless function on Vercel.
+Railway is a platform that allows you to deploy your applications with ease, and it's well-suited for long-running Discord bots.
 
-1.  **Install Vercel CLI (if you haven't already):**
-    ```bash
-    npm install -g vercel
-    ```
-2.  **Log in to Vercel:**
-    ```bash
-    vercel login
-    ```
-3.  **Deploy your project:**
-    -   Navigate to your project's root directory in your terminal.
-    -   Run the deploy command:
-        ```bash
-        vercel
-        ```
-    -   Follow the prompts. When asked to link an existing project or create a new one, choose as appropriate.
-    -   **Important**: Configure your environment variables (`DISCORD_BOT_TOKEN`, `DISCORD_CLIENT_ID`, `DISCORD_GUILD_ID`) directly on Vercel through your project settings (Project Settings -> Environment Variables). **Do not commit your `.env` file to version control.**
+1.  **Create a Railway Account:**
+    -   If you don't have one, sign up at [https://railway.app/](https://railway.app/).
 
-4.  **Register Slash Commands on Vercel Deployment:**
-    -   When deploying to Vercel, your `src/index.js` will run as a serverless function. The command registration logic in `src/index.js` will attempt to register the slash commands.
-    -   Ensure your `DISCORD_CLIENT_ID` and `DISCORD_GUILD_ID` (if registering guild-specific commands) are correctly set as environment variables on Vercel.
+2.  **Create a New Project:**
+    -   From your Railway dashboard, click "New Project".
+    -   You can choose to "Deploy from GitHub Repo" (recommended for continuous deployment) or "Deploy a Starter Template" / "Empty Project". If deploying from GitHub, connect your repository.
+
+3.  **Configure Environment Variables:**
+    -   In your Railway project, go to the "Variables" tab.
+    -   Add the following environment variables, replacing the placeholders with your actual values:
+        -   `DISCORD_BOT_TOKEN`: Your bot's token.
+        -   `DISCORD_CLIENT_ID`: Your bot's client ID.
+        -   `DISCORD_GUILD_ID`: The ID of your development guild (if you're registering guild commands).
+    -   **Important**: Do not commit your `.env` file to version control.
+
+4.  **Set Build and Start Commands:**
+    -   Railway usually auto-detects Node.js projects.
+    -   Ensure your "Build Command" is `npm install` (or `yarn install` if you use Yarn).
+    -   Ensure your "Start Command" is `node src/index.js`.
+
+5.  **Deploy:**
+    -   If you connected a GitHub repository, Railway will automatically deploy on pushes to your main branch.
+    -   Otherwise, you can manually trigger a deploy from the "Deployments" tab.
+
+6.  **Register Slash Commands:**
+    -   Your bot will register slash commands when it starts. Ensure your `DISCORD_CLIENT_ID` and `DISCORD_GUILD_ID` (if registering guild-specific commands) are correctly set as environment variables on Railway.
+    -   The bot needs to be running for the commands to be registered.
 
 ## Project Structure
 
 ```
 discord-forum-bot/
 ├── .env
-├── vercel.json
 ├── package.json
 ├── src/
 │   ├── index.js
