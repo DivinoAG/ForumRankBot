@@ -1,0 +1,4 @@
+node_modules
+.env
+post_data_debug.json
+*.log
