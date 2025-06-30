@@ -1,17 +1,14 @@
 ## Relevant Files
 
-- `README.md` - Project documentation, setup, and deployment instructions.
+- `src/commands/forum-rank.js` - Defines the `/forum-rank` slash command and its execution logic.
+- `src/commands/forum-rank.test.js` - Unit tests for the `/forum-rank` command logic.
 - `src/index.js` - Main bot entry point, handles Discord client initialization and event listeners.
-- `src/commands/top-posts.js` - Defines the `/top-posts` slash command and its execution logic.
 - `src/utils/discord-api.js` - Utility functions for interacting with the Discord API (e.g., fetching threads, messages, reactions).
 - `src/utils/report-generator.js` - Handles the logic for formatting the report output.
 - `src/utils/message-formatter.js` - Utility for handling Discord message size limits and formatting (standard vs. embed).
-- `config.js` or `.env` - Configuration for bot token, guild ID, and other environment variables.
+- `README.md` - Project documentation, setup, and deployment instructions.
+- `.env` - Configuration for bot token, guild ID, and other environment variables.
 - `package.json` - Project dependencies and scripts.
-- `src/commands/top-posts.test.js` - Unit tests for the `/top-posts` command logic.
-- `src/utils/discord-api.test.js` - Unit tests for Discord API utility functions.
-- `src/utils/report-generator.test.js` - Unit tests for report generation logic.
-- `src/utils/message-formatter.test.js` - Unit tests for message formatting logic.
 
 ### Notes
 
@@ -28,8 +25,8 @@
   - [x] 1.5 Set up a basic project structure (e.g., `src/`, `src/commands/`, `src/utils/`).
 - [x] 2.0 Discord Bot Command Handling
   - [x] 2.1 Implement Discord client initialization and login.
-  - [x] 2.2 Register the `/top-posts` slash command with Discord API, including `channel`, `number_of_posts`, and `direct_message` parameters.
-  - [x] 2.3 Implement command interaction listener to handle `/top-posts` command execution.
+  - [x] 2.2 Register the `/forum-rank` slash command with Discord API, including `channel`, `number_of_posts`, and `direct_message` parameters.
+  - [x] 2.3 Implement command interaction listener to handle `/forum-rank` command execution.
   - [x] 2.4 Implement logic to restrict command usage to server moderators.
 - [x] 3.0 Forum Thread Data Retrieval and Processing
   - [x] 3.1 Develop a utility function to fetch all threads from a given forum channel ID.
@@ -44,8 +41,8 @@
   - [x] 4.3 If the report exceeds limits, format it as an embedded message.
   - [x] 4.4 Implement logic to send the report to the originating channel or as a DM based on the `direct_message` parameter.
 - [x] 5.0 Deployment and Configuration
-  - [x] 5.1 Prepare the project for Vercel deployment (e.g., `vercel.json` if needed, ensuring environment variables are configured on Vercel).
-  - [x] 5.2 Document deployment steps for Vercel.
+  - [x] 5.1 Prepare the project for deployment on a Node.js hosting provider (e.g., Railway, Render, Heroku).
+  - [x] 5.2 Document deployment steps for the chosen hosting provider.
   - [x] 5.3 Add error handling and logging for production environment.
   - [x] 5.4 Implement basic unit tests for core functionalities (e.g., reaction counting, report formatting, command parsing).
 - [x] 6.0 Documentation

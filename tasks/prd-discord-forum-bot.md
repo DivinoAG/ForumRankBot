@@ -23,10 +23,10 @@ This document outlines the requirements for a Discord bot designed to help serve
     *   The name of each thread.
     *   The total count of the primary reaction for each thread.
     *   A list of all tags assigned to each thread.
-6.  The bot **must** be triggered by a slash command: `/top-posts`.
-7.  The `/top-posts` command **must** include a required parameter `channel` to specify the target forum channel.
-8.  The `/top-posts` command **must** include an optional parameter `number_of_posts` to limit the results to the top X posts. If not provided, all posts will be listed.
-9.  The `/top-posts` command **must** include an optional boolean parameter `direct_message` (defaulting to `false`) to send the report as a DM to the triggering user instead of the channel.
+6.  The bot **must** be triggered by a slash command: `/forum-rank`.
+7.  The `/forum-rank` command **must** include a required parameter `channel` to specify the target forum channel.
+8.  The `/forum-rank` command **must** include an optional parameter `number_of_posts` to limit the results to the top X posts. If not provided, all posts will be listed.
+9.  The `/forum-rank` command **must** include an optional boolean parameter `direct_message` (defaulting to `false`) to send the report as a DM to the triggering user instead of the channel.
 10. The bot **must** output the report to the same channel where the command was issued by default.
 11. The bot **must** be accessible only to server moderators initially. Channel-specific access limitations can be considered as a future enhancement.
 
@@ -42,12 +42,12 @@ This document outlines the requirements for a Discord bot designed to help serve
 *   The bot should respect Discord's message size limits. If the report exceeds the standard message length, it should be sent as an embedded message.
 
 ## 7. Technical Considerations
-*   The bot will be developed using JavaScript.
-*   The bot will be deployed to a free plan on Vercel.
-*   The bot will need appropriate Discord API permissions to read channel messages, threads, and reactions.
-*   The bot is expected to process around 80 threads initially, with an anticipated growth of 5-10 new threads per month. This should be considered for performance on the Vercel free tier.
+*   The bot will be developed using Node.js and the `discord.js` library.
+*   Deployment will be handled by a hosting service that supports Node.js applications (e.g., Railway, Render, Heroku).
+*   The bot will need appropriate Discord API permissions to read channel messages, threads, and reactions, as well as `Manage Channels` to check for moderator permissions.
+*   The bot is expected to process around 80 threads initially, with an anticipated growth of 5-10 new threads per month.
 
 ## 8. Success Metrics
-*   Successful deployment and operation on Vercel.
-*   Moderators are able to successfully use the `/top-posts` command to generate reports.
+*   Successful deployment and operation on a Node.js hosting service.
+*   Moderators are able to successfully use the `/forum-rank` command to generate reports.
 *   The generated reports accurately reflect the reaction counts and thread information.
