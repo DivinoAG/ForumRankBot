@@ -30,6 +30,11 @@ This document outlines the requirements for a Discord bot designed to help serve
 10. The bot **must** output the report to the same channel where the command was issued by default.
 11. The bot **must** be accessible only to server moderators initially. Channel-specific access limitations can be considered as a future enhancement.
 
+12. The bot **must** be deployable to Firebase Functions.
+13. The bot **must** utilize Firebase services compatible with the free Spark plan for execution and deployment.
+14. The bot **must** be triggered via an HTTP request from a Discord Interaction Endpoint, processed by a Firebase Function.
+15. The bot **must** store any necessary persistent data (if identified) using Firebase services compatible with the free Spark plan, such as Firestore or Realtime Database.
+16. The bot **must** be configured to handle Discord interactions securely using Firebase Function environment variables for sensitive keys.
 ## 5. Non-Goals (Out of Scope)
 *   The bot will **not** create new threads.
 *   The bot will **not** edit or delete existing threads or messages.
@@ -43,11 +48,12 @@ This document outlines the requirements for a Discord bot designed to help serve
 
 ## 7. Technical Considerations
 *   The bot will be developed using Node.js and the `discord.js` library.
-*   Deployment will be handled by a hosting service that supports Node.js applications (e.g., Railway, Render, Heroku).
+*   Deployment will be handled using **Firebase Functions** for execution, compatible with the **free Spark plan**.
+*   The bot's functionality will be triggered by **HTTP requests** sent from Discord to a Firebase Function endpoint.
 *   The bot will need appropriate Discord API permissions to read channel messages, threads, and reactions, as well as `Manage Channels` to check for moderator permissions.
 *   The bot is expected to process around 80 threads initially, with an anticipated growth of 5-10 new threads per month.
 
 ## 8. Success Metrics
-*   Successful deployment and operation on a Node.js hosting service.
+*   Successful deployment and operation on **Firebase Functions**.
 *   Moderators are able to successfully use the `/forum-rank` command to generate reports.
 *   The generated reports accurately reflect the reaction counts and thread information.
