@@ -53,27 +53,27 @@
   - [x] 6.3 Include steps for creating a Discord bot application and obtaining necessary tokens/IDs.
   - [x] 6.4 Provide comprehensive deployment instructions for Vercel.
   - [x] 6.5 Maintain and update `README.md` as the project evolves.
-- [ ] 7.0 Firebase Project Setup and Initialization
-  - [ ] 7.1 Create a new Firebase project in the Firebase console.
-  - [ ] 7.2 Install the Firebase CLI globally (`npm install -g firebase-tools`).
-  - [ ] 7.3 Log in to Firebase using the CLI (`firebase login`).
-  - [ ] 7.4 Initialize Firebase in the project directory (`firebase init`).
-  - [ ] 7.5 Select 'Functions' and associate the project with the new Firebase project.
-  - [ ] 7.6 Choose JavaScript as the language for Cloud Functions.
-  - [ ] 7.7 Install dependencies for Firebase Functions.
-- [ ] 8.0 Adapt Bot for Firebase Functions
-  - [ ] 8.1 Refactor the bot's core logic (`src/index.js`, `src/commands/forum-rank.js`) to be callable from a Firebase Function HTTP trigger.
-  - [ ] 8.2 Modify the command handling to process incoming Discord Interaction HTTP requests instead of WebSocket events.
-  - [ ] 8.3 Ensure the logic remains stateless as required by serverless functions.
-- [ ] 9.0 Implement Discord Interaction Endpoint
-  - [ ] 9.1 Create an HTTP triggered Firebase Function (e.g., `functions/index.js`) to act as the Discord Interaction Endpoint.
-  - [ ] 9.2 Implement logic within the function to verify incoming Discord requests using the signature and timestamp headers.
-  - [ ] 9.3 Parse the incoming interaction payload to extract command details and parameters.
-  - [ ] 9.4 Call the refactored bot logic with the parsed command details.
-  - [ ] 9.5 Format and send the response back to Discord via an HTTP response from the function.
-- [ ] 10.0 Secure Configuration with Firebase
-  - [ ] 10.1 Migrate sensitive keys (Discord Bot Token, Discord Public Key, Guild ID, etc.) from `.env` to Firebase Functions environment configuration using `firebase functions:config:set`.
-  - [ ] 10.2 Update the code to access these values via `process.env` or `functions.config()`.
+- [x] 7.0 Firebase Project Setup and Initialization
+  - [x] 7.1 Create a new Firebase project in the Firebase console.
+  - [x] 7.2 Install the Firebase CLI globally (`npm install -g firebase-tools`).
+  - [x] 7.3 Log in to Firebase using the CLI (`firebase login`).
+  - [x] 7.4 Initialize Firebase in the project directory (`firebase init`).
+  - [x] 7.5 Select 'Functions' and associate the project with the new Firebase project.
+  - [x] 7.6 Choose JavaScript as the language for Cloud Functions.
+  - [x] 7.7 Install dependencies for Firebase Functions.
+- [x] 8.0 Adapt Bot for Firebase Functions
+  - [x] 8.1 Refactor the bot's core logic (`src/index.js`, `src/commands/forum-rank.js`) to be callable from a Firebase Function HTTP trigger.
+  - [x] 8.2 Modify the command handling to process incoming Discord Interaction HTTP requests instead of WebSocket events.
+  - [x] 8.3 Ensure the logic remains stateless as required by serverless functions.
+- [x] 9.0 Implement Discord Interaction Endpoint
+  - [x] 9.1 Create an HTTP triggered Firebase Function (e.g., `functions/index.js`) to act as the Discord Interaction Endpoint.
+  - [x] 9.2 Implement logic within the function to verify incoming Discord requests using the signature and timestamp headers.
+  - [x] 9.3 Parse the incoming interaction payload to extract command details and parameters.
+  - [x] 9.4 Call the refactored bot logic with the parsed command details.
+  - [x] 9.5 Format and send the response back to Discord via an HTTP response from the function.
+- [x] 10.0 Secure Configuration with Firebase
+  - [x] 10.1 Migrate sensitive keys (Discord Bot Token, Discord Public Key, Guild ID, etc.) from `.env` to Firebase Functions environment configuration using `firebase functions:config:set`.
+  - [x] 10.2 Update the code to access these values via `process.env` or `functions.config()`.
 - [ ] 11.0 Deployment to Firebase
   - [ ] 11.1 Deploy the Firebase Function using `firebase deploy --only functions`.
   - [ ] 11.2 Obtain the public URL for the deployed HTTP function.
