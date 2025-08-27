@@ -7,9 +7,17 @@ async function fetchForumThreads(channel) {
 
     console.log(`Fetching threads for channel: ${channel.name}`);
 
+    const fetchedIds = new Set();
+
     // Fetch all active threads
     const activeThreadsCollection = await channel.threads.fetchActive();
-    const activeThreads = Array.from(activeThreadsCollection.threads.values());
+    const activeThreads = [];
+    activeThreadsCollection.threads.forEach(thread => {
+        if (!fetchedIds.has(thread.id)) {
+            activeThreads.push(thread);
+            fetchedIds.add(thread.id);
+        }
+    });
     console.log(`Found ${activeThreads.length} active threads.`);
 
     // Fetch all archived threads with pagination
@@ -26,7 +34,12 @@ async function fetchForumThreads(channel) {
         const archivedThreads = await channel.threads.fetchArchived(options);
         if (archivedThreads.threads.size > 0) {
             const sortedThreads = Array.from(archivedThreads.threads.values()).sort((a, b) => b.id.localeCompare(a.id));
-            allArchivedThreads = allArchivedThreads.concat(sortedThreads);
+            sortedThreads.forEach(thread => {
+                if (!fetchedIds.has(thread.id)) {
+                    allArchivedThreads.push(thread);
+                    fetchedIds.add(thread.id);
+                }
+            });
             lastThread = sortedThreads[sortedThreads.length - 1];
         }
         hasMore = archivedThreads.hasMore;
