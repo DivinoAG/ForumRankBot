@@ -15,7 +15,7 @@ client.commands = new Collection();
 const forumRankCommand = require('./commands/forum-rank.js');
 client.commands.set(forumRankCommand.data.name, forumRankCommand);
 
-client.once('ready', async () => {
+client.once('clientReady', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN);

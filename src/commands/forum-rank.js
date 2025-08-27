@@ -46,7 +46,10 @@ module.exports = {
         await interaction.deferReply({ flags: directMessage ? [MessageFlags.Ephemeral] : [] });
 
         try {
+            console.log('Fetching forum threads...');
             const threads = await fetchForumThreads(channel);
+            console.log(`Found ${threads.length} threads in total.`);
+
             const defaultReactionEmoji = channel.defaultReactionEmoji;
 
             if (!defaultReactionEmoji) {
@@ -58,7 +61,9 @@ module.exports = {
             }
 
             const threadData = [];
+            let processedCount = 0;
             for (const thread of threads) {
+                console.log(`Processing thread ${++processedCount}/${threads.length}: ${thread.name}`);
                 const initialMessage = await fetchInitialMessage(thread);
                 if (initialMessage) {
                     const reaction = initialMessage.reactions.cache.find(
@@ -75,6 +80,7 @@ module.exports = {
                 await new Promise(resolve => setTimeout(resolve, 200)); // 200ms delay between each request
             }
 
+            console.log('Finished processing all threads. Sorting data...');
             // Sort threads by reaction count (descending)
             threadData.sort((a, b) => b.reactionCount - a.reactionCount);
 
@@ -83,6 +89,7 @@ module.exports = {
 
             const debugFilePath = path.resolve(process.cwd(), 'post_data_debug.json');
             fs.writeFileSync(debugFilePath, JSON.stringify(threadData, null, 2));
+            console.log(`Debug data written to ${debugFilePath}`);
 
             const chunkSize = 50;
             for (let i = 0; i < finalThreadData.length; i += chunkSize) {

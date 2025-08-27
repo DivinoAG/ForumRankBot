@@ -5,12 +5,38 @@ async function fetchForumThreads(channel) {
         throw new Error('Provided channel is not a forum channel.');
     }
 
-    const activeThreads = await channel.threads.fetch({ archived: false });
-    const archivedThreads = await channel.threads.fetch({ archived: true });
+    console.log(`Fetching threads for channel: ${channel.name}`);
 
-    const allThreads = [...activeThreads.threads.values(), ...archivedThreads.threads.values()];
+    // Fetch all active threads
+    const activeThreadsCollection = await channel.threads.fetchActive();
+    const activeThreads = Array.from(activeThreadsCollection.threads.values());
+    console.log(`Found ${activeThreads.length} active threads.`);
 
-    return allThreads;
+    // Fetch all archived threads with pagination
+    let allArchivedThreads = [];
+    let lastThread = null;
+    let hasMore = true;
+
+    while (hasMore) {
+        const options = { limit: 100 };
+        if (lastThread) {
+            options.before = lastThread.id;
+        }
+
+        const archivedThreads = await channel.threads.fetchArchived(options);
+        if (archivedThreads.threads.size > 0) {
+            const sortedThreads = Array.from(archivedThreads.threads.values()).sort((a, b) => b.id.localeCompare(a.id));
+            allArchivedThreads = allArchivedThreads.concat(sortedThreads);
+            lastThread = sortedThreads[sortedThreads.length - 1];
+        }
+        hasMore = archivedThreads.hasMore;
+        console.log(`Fetched a batch of ${archivedThreads.threads.size} archived threads. Total archived so far: ${allArchivedThreads.length}. Has more: ${hasMore}`);
+    }
+
+    console.log(`Found ${allArchivedThreads.length} archived threads in total.`);
+
+    // Combine active and archived threads
+    return [...activeThreads, ...allArchivedThreads];
 }
 
 async function fetchInitialMessage(thread) {
